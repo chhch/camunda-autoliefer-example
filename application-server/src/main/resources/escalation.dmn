@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_177b2co" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="order_escalation" name="Eskalation Bestellung">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Menge Rechnung - Menge Lieferschein" camunda:inputVariable="order_amount">
+        <inputExpression id="inputExpression_1" typeRef="integer" expressionLanguage="JavaScript">
+          <text>Math.abs(invoice_amount - deliveryNote_amount)</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0fhyuek" label="Stakeholder" name="escalation_stakeholder" typeRef="string">
+        <outputValues id="UnaryTests_0e1bi29">
+          <text>"einkäufer","vorstand","präsident"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_01ty4ue">
+        <inputEntry id="UnaryTests_0v1iqt0">
+          <text>&lt;100</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1k30dwo">
+          <text>"Einkäufer"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_07m6pt8">
+        <inputEntry id="UnaryTests_1emt9lj">
+          <text>[100..1000]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0nan619">
+          <text>"Vorstand"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1yada44">
+        <inputEntry id="UnaryTests_1i9ye8q">
+          <text>&gt;1000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0bq3ugn">
+          <text>"Präsident"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

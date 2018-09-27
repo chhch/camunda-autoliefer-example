@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0g2h7io" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="options" name="Handlungsoptionen">
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Menge Rechnung - Menge Lieferschein" camunda:inputVariable="betrag">
+        <inputExpression id="inputExpression_1" typeRef="integer" expressionLanguage="JavaScript">
+          <text>Math.abs(invoice_amount - deliveryNote_amount)</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Handlungsoption" name="option_recommendation" typeRef="string" />
+      <rule id="DecisionRule_0q0r57k">
+        <inputEntry id="UnaryTests_1ru2cmg">
+          <text>&lt;=500</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_00eoz96">
+          <text>"Höfflich nachfragen"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_04j571w">
+        <inputEntry id="UnaryTests_0vpgqup">
+          <text>&gt;500</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_10n2lf3">
+          <text>"Anwalt einschalten"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
